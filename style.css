@@ -1,0 +1,35 @@
+/*
+body{
+	border:10px solid #bdc3c7;
+	padding: 1px; 
+	max-width: 2000px;
+	width:100%; 
+	margin: 1px auto;
+	background: #191970;
+}
+
+.welcome{
+	color: #3498db;
+	text-transform: uppercase;
+	letter-spacing: 0.1rem;
+}
+*/
+.html, body{
+	background:#191970;
+	margin-left:15px; margin-right:15px; 
+	padding:0px; 
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+}
+
+
+
+.welcome{
+	color: #3498db;
+	text-transform: uppercase;
+	letter-spacing: 0.1rem;
+}
+
+.region{
+	color:#1dcf55;
+}
+
