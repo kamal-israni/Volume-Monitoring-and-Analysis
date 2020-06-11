@@ -40,41 +40,130 @@ try{
 connection = DriverManager.getConnection(connectionUrl+database, userid, password);
 statement=connection.createStatement();
 String sqlR =null;
+String query=null;
 String theRegion = request.getParameter("region");
 String theFeature = request.getParameter("features");
 String theDateIn=request.getParameter("datein");
 String theDateOut=request.getParameter("dateout");
 String theTimeIn=request.getParameter("logintime");
 String theTimeOut=request.getParameter("logouttime");
-String theCustomer=request.getParameter("customer");
+String theCustomer=request.getParameter("customertype");
 String month=null;
 String date = null;
 
-	
-	
 	sqlR="select * from learner where region='"+theRegion+"' && customertype='"+theCustomer+"' && DateLogIn >= '"+theDateIn+"' &&  DateLogIn <= '"+theDateOut+"' && LoggedIn >= '"+theTimeIn+"' && LoggedOut <= '"+theTimeOut+"' && features='"+theFeature+"';";
 	resultR=statement.executeQuery(sqlR);
 
-	/*
-	sqlDate="select * from learner where DateLogIn >= '"+theDateIn+"' && DateLogIn <= '"+theDateOut+"'; ";
-	resultDate=statement.executeQuery(sqlDate);
-	*/
-	/*
-	sqlTime="select * from learner where LoggedIn >= '"+theTimeIn+"' && LoggedOut <= '"+theTimeOut+"'; ";
-	resultTime=statement.executeQuery(sqlTime);
-	*/
-	
+
 	while(resultR.next()){
 		String Name=resultR.getString("Name");
 		String Feature=resultR.getString("Features");
 		String Region=resultR.getString("Region");
-		
+	
 		out.println(Name+" being a "+ theCustomer+ " customer used the "+Feature+" from "+Region+
-				" between dates "+theDateIn+" and "+theDateOut+ " between times "+ 
+				" between dates "+theDateIn+" and "+theDateOut+ " and between times "+ 
 				theTimeIn+ " and "+theTimeOut); 
-		 %><br></br>
-		 <%
+	 	%><br></br>
+	 	<%
 	}
+
+
+	if(theRegion.isEmpty() && theFeature.isEmpty())
+	{
+		sqlR="select * from learner where customertype='"+theCustomer+"' && DateLogIn >= '"+theDateIn+"' &&  DateLogIn <= '"+theDateOut+"' && LoggedIn >= '"+theTimeIn+"' && LoggedOut <= '"+theTimeOut+"';";
+		resultR=statement.executeQuery(sqlR);
+			
+		while(resultR.next())
+		{
+			String Name=resultR.getString("Name");
+			out.println(Name+" being a "+ theCustomer+ " customer logged in between dates "+theDateIn+" and "+theDateOut+ " and between times "+ 
+					theTimeIn+ " and "+theTimeOut);
+				%><br></br>
+				<%
+		}
+	}
+
+	else if(theRegion.isEmpty() && theCustomer==null)
+	{
+		sqlR="select * from learner where features='"+theFeature+"' && DateLogIn >= '"+theDateIn+"' &&  DateLogIn <= '"+theDateOut+"' && LoggedIn >= '"+theTimeIn+"' && LoggedOut <= '"+theTimeOut+"';";
+		resultR=statement.executeQuery(sqlR);
+			
+		while(resultR.next())
+		{
+			String Name=resultR.getString("Name");
+			out.println(Name+" used the feature "+theFeature+ " between dates "+theDateIn+" and "+theDateOut+ " and between times "+ 
+					theTimeIn+ " and "+theTimeOut);
+				%><br></br>
+				<%
+		}
+	}
+	
+	else if(theFeature.isEmpty() && theCustomer==null)
+	{
+		sqlR="select * from learner where region='"+theRegion+"' && DateLogIn >= '"+theDateIn+"' &&  DateLogIn <= '"+theDateOut+"' && LoggedIn >= '"+theTimeIn+"' && LoggedOut <= '"+theTimeOut+"';";
+		resultR=statement.executeQuery(sqlR);
+			
+		while(resultR.next())
+		{
+			String Name=resultR.getString("Name");
+			out.println(Name+" from  "+theRegion+ "logged in between dates "+theDateIn+" and "+theDateOut+ " and between times "+ 
+					theTimeIn+ " and "+theTimeOut);
+				%><br></br>
+				<%
+		}
+	}
+	
+	else if(theRegion.isEmpty())
+	{
+		sqlR="select * from learner where customertype='"+theCustomer+"' && DateLogIn >= '"+theDateIn+"' &&  DateLogIn <= '"+theDateOut+"' && LoggedIn >= '"+theTimeIn+"' && LoggedOut <= '"+theTimeOut+"' && features='"+theFeature+"';";
+		resultR=statement.executeQuery(sqlR);
+		
+		while(resultR.next())
+		{
+			String Name=resultR.getString("Name");
+			out.println(Name+" being a "+ theCustomer+ " customer used the "+theFeature+
+					" between dates "+theDateIn+" and "+theDateOut+ " and between times "+ 
+					theTimeIn+ " and "+theTimeOut);
+			%><br></br>
+			<%
+		}	
+	}
+	
+	
+	else if(theFeature.isEmpty())
+	{
+		
+		sqlR="select * from learner where customertype='"+theCustomer+"' && DateLogIn >= '"+theDateIn+"' &&  DateLogIn <= '"+theDateOut+"' && LoggedIn >= '"+theTimeIn+"' && LoggedOut <= '"+theTimeOut+"' && region='"+theRegion+"';";
+		resultR=statement.executeQuery(sqlR);
+		
+		while(resultR.next())
+		{
+			String Name=resultR.getString("Name");
+			out.println(Name+" being a "+ theCustomer+ " customer logged in from the region "+theRegion+" between dates "+theDateIn+" and "+theDateOut+ " and between times "+ 
+					theTimeIn+ " and "+theTimeOut);
+			%><br></br>
+			<%
+		}
+	}
+	
+	
+	else if(theCustomer==null)
+	{
+	
+		sqlR="select * from learner where region='"+theRegion+"' && DateLogIn >= '"+theDateIn+"' &&  DateLogIn <= '"+theDateOut+"' && features='"+theFeature+"' && LoggedIn >= '"+theTimeIn+"' && LoggedOut <= '"+theTimeOut+"';"; 
+		resultR=statement.executeQuery(sqlR);
+		
+		while(resultR.next())
+		{
+			String Name=resultR.getString("Name");
+			out.println(Name+" used the feature "+theFeature+ " from the region "+theRegion+" between dates "+theDateIn+" and "+theDateOut+ " and between times "+ 
+					theTimeIn+ " and "+theTimeOut);
+			%><br></br>
+			<%
+		}
+	}
+	
+	
 }		
 catch (Exception e) {
 e.printStackTrace();
