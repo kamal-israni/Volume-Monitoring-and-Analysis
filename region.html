@@ -1,27 +1,29 @@
 <html>
+<body> 
 <head>
 <title>Welcome</title>
-<link type="text/css" rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" type="text/css" href=css/style.css> 
 </head>
-<form action="region.jsp" >
-<h1 class="welcome" style="text-align:center;" >Welcome to Banking Application</h1>
 
-	<label style="color: #10ccad">Region:</label>
+ <form action="region.jsp" > 
+ <h1 class="welcome" style="text-align:center;" >Welcome to the Banking Application</h1> 
+
+	
+	<label style="color: #008B8B">Regions:</label>
 	<select name="region" style="color: #008B8B">
 		
-		<option></option>
+	  	<option></option>
 		<option value="Baner">Baner</option>
 		<option value="Aundh">Aundh</option>
 		<option value="Wagholi">Wagholi</option>
 		<option value="Katraj">Katraj</option>
 		<option value="Hadapsar">Hadapsar</option>
 		<option value="Kothrud">Kothrud</option>
-	
 	</select>
 	
 	
 	<br></br>
-	<label style="color: #10ccad">Features:</label>
+	<label style="color: #008B8B">Features:</label>
 	<select name="features" style="color: #008B8B">
 		
 		<option></option>
@@ -37,26 +39,28 @@
 
 	<br><br/>
 	
-	<label style="color: #10ccad">Date from:</label> <input type="date" name="datein" /> 
-	<label style="color: #10ccad">to</label> <input type="date" name="dateout" />
+	<label style="color: #008B8B">Date from:</label> <input type="date" name="datein" /> 
+	<label style="color: #008B8B">to</label> <input type="date" name="dateout" />
 	<br></br>
 	
-	<label style="color: #10ccad">Logged in time:</label><input type="time" name="logintime" />
+	<label style="color: #008B8B">Logged in time:</label><input type="time" name="logintime" />
 	<br></br>
-	<label style="color: #10ccad">Logged out time:</label><input type="time" name="logouttime" />
-	<br></br>
-	
-	
-	<label style="color: #10ccad">Type of Customer:</label>	
-	<input type="radio" name="customer" value="Gold"> Gold
-	<input type="radio" name="customer" value="Silver"> Silver
-	<input type="radio" name="customer" value="Platinum"> Platinum
-	
-	
+	<label style="color: #008B8B">Logged out time:</label><input type="time" name="logouttime" />
 	<br></br>
 	
- <input type="submit" value="Search"> 	 
+	
+	<label style="color: #008B8B">Type of Customer:</label>	
+	<input type="radio" name="customertype" value="Gold"> Gold
+	<input type="radio" name="customertype" value="Silver"> Silver
+	<input type="radio" name="customertype" value="Platinum"> Platinum
+	
+	
+	<br></br>
+	
+ 	 <input type="submit" value="Search">
+ 		 
+
 </form>
 
-
+</body>
 </html>
