@@ -48,27 +48,58 @@ String theDateOut=request.getParameter("dateout");
 String theTimeIn=request.getParameter("logintime");
 String theTimeOut=request.getParameter("logouttime");
 String theCustomer=request.getParameter("customertype");
-String month=null;
-String date = null;
 
+
+	
+	int count=0;
+	
 	sqlR="select * from learner where region='"+theRegion+"' && customertype='"+theCustomer+"' && DateLogIn >= '"+theDateIn+"' &&  DateLogIn <= '"+theDateOut+"' && LoggedIn >= '"+theTimeIn+"' && LoggedOut <= '"+theTimeOut+"' && features='"+theFeature+"';";
 	resultR=statement.executeQuery(sqlR);
 
 
 	while(resultR.next()){
 		String Name=resultR.getString("Name");
-		String Feature=resultR.getString("Features");
-		String Region=resultR.getString("Region");
-	
-		out.println(Name+" being a "+ theCustomer+ " customer used the "+Feature+" from "+Region+
+		String Date=resultR.getString("DateLogIn");
+		String TimeIn=resultR.getString("LoggedIn");
+		String TimeOut=resultR.getString("LoggedOut");
+		String AppId=resultR.getString("AppId");
+		
+		
+		out.println("Date "+Date+" - ");
+		out.println("Application ID"+ AppId + " - ");
+		
+		out.println(Name+" being a "+ theCustomer+ " customer used the "+theFeature+" from "+theRegion+
 				" between dates "+theDateIn+" and "+theDateOut+ " and between times "+ 
-				theTimeIn+ " and "+theTimeOut); 
+				TimeIn+ " and "+TimeOut);
+		count++;
 	 	%><br></br>
 	 	<%
 	}
-
-
-	if(theRegion.isEmpty() && theFeature.isEmpty())
+	
+	if(theTimeIn.isEmpty() && theTimeOut.isEmpty())
+	{
+		sqlR="select * from learner where region='"+theRegion+"' && features='"+theFeature+"' && customertype='"+theCustomer+"' && DateLogIn >= '"+theDateIn+"' &&  DateLogIn <= '"+theDateOut+"';";
+		resultR=statement.executeQuery(sqlR);
+		
+		while(resultR.next())
+		{
+			String Name=resultR.getString("Name");
+			String Date=resultR.getString("DateLogIn");
+			String AppId=resultR.getString("AppId");
+				
+			out.println("Date "+Date+" - ");
+			out.println("Application ID"+ AppId + " - ");
+				
+			out.println(Name+" being a "+ theCustomer+ " customer used the "+theFeature+" from "+theRegion+
+					" between dates "+theDateIn+" and "+theDateOut);
+			count++;
+				%><br></br>
+				<%
+		}
+		
+	}
+	
+	else if(theRegion.isEmpty() && theFeature.isEmpty())
 	{
 		sqlR="select * from learner where customertype='"+theCustomer+"' && DateLogIn >= '"+theDateIn+"' &&  DateLogIn <= '"+theDateOut+"' && LoggedIn >= '"+theTimeIn+"' && LoggedOut <= '"+theTimeOut+"';";
 		resultR=statement.executeQuery(sqlR);
@@ -76,8 +107,17 @@ String date = null;
 		while(resultR.next())
 		{
 			String Name=resultR.getString("Name");
+			String Date=resultR.getString("DateLogIn");
+			String TimeIn=resultR.getString("LoggedIn");
+			String TimeOut=resultR.getString("LoggedOut");
+			String AppId=resultR.getString("AppId");
+				
+			out.println("Date "+Date+" - ");
+			out.println("Application ID"+ AppId + " - ");
+				
 			out.println(Name+" being a "+ theCustomer+ " customer logged in between dates "+theDateIn+" and "+theDateOut+ " and between times "+ 
-					theTimeIn+ " and "+theTimeOut);
+					TimeIn+ " and "+TimeOut);
+			count++;
 				%><br></br>
 				<%
 		}
@@ -91,8 +131,18 @@ String date = null;
 		while(resultR.next())
 		{
 			String Name=resultR.getString("Name");
+			String Date=resultR.getString("DateLogIn");
+			String TimeIn=resultR.getString("LoggedIn");
+			String TimeOut=resultR.getString("LoggedOut");
+			String AppId=resultR.getString("AppId");
+				
+			out.println("Date "+Date+" - ");
+			out.println("Application ID"+ AppId + " - ");
+			
+			
 			out.println(Name+" used the feature "+theFeature+ " between dates "+theDateIn+" and "+theDateOut+ " and between times "+ 
-					theTimeIn+ " and "+theTimeOut);
+					TimeIn+ " and "+TimeOut);
+			count++;
 				%><br></br>
 				<%
 		}
@@ -106,8 +156,18 @@ String date = null;
 		while(resultR.next())
 		{
 			String Name=resultR.getString("Name");
+			String Date=resultR.getString("DateLogIn");
+			String TimeIn=resultR.getString("LoggedIn");
+			String TimeOut=resultR.getString("LoggedOut");
+			String AppId=resultR.getString("AppId");
+			
+			out.println("Date "+Date+" - ");
+			out.println("Application ID"+ AppId + " - ");
+			
+			
 			out.println(Name+" from  "+theRegion+ "logged in between dates "+theDateIn+" and "+theDateOut+ " and between times "+ 
-					theTimeIn+ " and "+theTimeOut);
+					TimeIn+ " and "+TimeOut);
+			count++;
 				%><br></br>
 				<%
 		}
@@ -121,9 +181,18 @@ String date = null;
 		while(resultR.next())
 		{
 			String Name=resultR.getString("Name");
+			String Date=resultR.getString("DateLogIn");
+			String TimeIn=resultR.getString("LoggedIn");
+			String TimeOut=resultR.getString("LoggedOut");
+			String AppId=resultR.getString("AppId");
+			
+			out.println("Date "+Date+" - ");
+			out.println("Application ID"+ AppId + " - ");
+			
 			out.println(Name+" being a "+ theCustomer+ " customer used the "+theFeature+
 					" between dates "+theDateIn+" and "+theDateOut+ " and between times "+ 
-					theTimeIn+ " and "+theTimeOut);
+					TimeIn+ " and "+TimeOut);
+			count++;
 			%><br></br>
 			<%
 		}	
@@ -139,8 +208,17 @@ String date = null;
 		while(resultR.next())
 		{
 			String Name=resultR.getString("Name");
+			String Date=resultR.getString("DateLogIn");
+			String TimeIn=resultR.getString("LoggedIn");
+			String TimeOut=resultR.getString("LoggedOut");
+			String AppId=resultR.getString("AppId");
+			
+			out.println("Date "+Date+" - ");
+			out.println("Application ID"+ AppId + " - ");
+			
 			out.println(Name+" being a "+ theCustomer+ " customer logged in from the region "+theRegion+" between dates "+theDateIn+" and "+theDateOut+ " and between times "+ 
-					theTimeIn+ " and "+theTimeOut);
+					TimeIn+ " and "+TimeOut);
+			count++;
 			%><br></br>
 			<%
 		}
@@ -156,13 +234,25 @@ String date = null;
 		while(resultR.next())
 		{
 			String Name=resultR.getString("Name");
+			String Date=resultR.getString("DateLogIn");
+			String TimeIn=resultR.getString("LoggedIn");
+			String TimeOut=resultR.getString("LoggedOut");
+			String AppId=resultR.getString("AppId");
+			
 			out.println(Name+" used the feature "+theFeature+ " from the region "+theRegion+" between dates "+theDateIn+" and "+theDateOut+ " and between times "+ 
-					theTimeIn+ " and "+theTimeOut);
+					TimeIn+ " and "+TimeOut);
+			count++;
 			%><br></br>
 			<%
 		}
 	}
 	
+	
+	/*
+	sqlDate="select * from learner where DateLogIn >= '"+theDateIn+"' && DateLogIn <= '"+theDateOut+"'; ";
+	resultDate=statement.executeQuery(sqlDate);
+	*/
+	out.println("The total number of users logged in are "+count);
 	
 }		
 catch (Exception e) {
